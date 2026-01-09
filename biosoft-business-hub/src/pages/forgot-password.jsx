@@ -13,10 +13,7 @@ const ForgotPassword = () => {
     setError('');
 
     try {
-      // TODO: Replace with actual API endpoint when backend is ready
-      // const response = await axios.post('/api/auth/forgot-password', { email });
-
-      // Simulate API call
+      // To be replaced with actual backend API endpoints
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setSubmitted(true);

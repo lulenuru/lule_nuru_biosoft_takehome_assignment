@@ -23,12 +23,6 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      // TODO: Replace with actual API endpoint
-      // const token = localStorage.getItem('authToken');
-      // const response = await axios.get('/api/business/orders', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-
       // Mock data
       setOrders([
         {
@@ -422,7 +416,7 @@ const Orders = () => {
           </div>
         )}
 
-        {/* Confirm Dialog */}
+        
         <ConfirmBanner
           isOpen={confirmDialog.isOpen}
           onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}

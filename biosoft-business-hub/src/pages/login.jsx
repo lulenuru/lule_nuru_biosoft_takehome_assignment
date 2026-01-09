@@ -25,14 +25,11 @@ const Login = () => {
     setError('');
 
     try {
-      // TODO: Replace with actual API endpoint when backend is ready
-      // const response = await axios.post('/api/auth/login', formData);
-      // const { token, user } = response.data;
+      // To be replaced with actual backend API endpoints
 
       // Mock data for development
       let mockUser = null;
-      
-      // Mock authentication
+     
       if (formData.email === 'admin@biosoft.com' && formData.password === 'admin123') {
         mockUser = {
           token: 'mock-superadmin-token-123',
@@ -61,7 +58,7 @@ const Login = () => {
             name: 'Staff Member',
             email: 'staff@biosoft.com',
             role: 'staff',
-            staffRole: 'Sales' // This would come from the backend based on what role was assigned
+            staffRole: 'Sales' 
           }
         };
       } else {
@@ -70,11 +67,11 @@ const Login = () => {
 
       const { token, user } = mockUser;
       
-      // Store authentication token
+      
       localStorage.setItem('authToken', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      // Redirect based on user role
+      // user role redirection
       if (user.role === 'superadmin') {
         navigate('/superadmin/dashboard');
       } else if (user.role === 'business_owner') {
@@ -187,7 +184,7 @@ const Login = () => {
               </Link>
             </p>
             <p className="text-sm text-gray-600 mt-2">
-              <Link to="/marketplace" className="font-medium text-pink-400 hover:text-pink-500">
+              <Link to="/marketplace" className="font-medium text-blue-600 hover:text-blue-700">
                 Browse Marketplace
               </Link>
             </p>

@@ -23,12 +23,6 @@ const Businesses = () => {
 
   const fetchBusinesses = async () => {
     try {
-      // TODO: Uncomment when backend is ready
-      // const token = localStorage.getItem('authToken');
-      // const response = await axios.get('/api/superadmin/businesses', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-      // setBusinesses(Array.isArray(response.data) ? response.data : []);
 
       // Mock data for development
       setBusinesses([
@@ -92,13 +86,6 @@ const Businesses = () => {
       message: `Are you sure you want to ${newStatus === 'suspended' ? 'suspend' : 'activate'} ${business.name}?`,
       onConfirm: async () => {
         try {
-          // TODO: Uncomment when backend is ready
-          // const token = localStorage.getItem('authToken');
-          // await axios.patch(
-          //   `/api/superadmin/businesses/${businessId}/status`,
-          //   { status: newStatus },
-          //   { headers: { Authorization: `Bearer ${token}` } }
-          // );
 
           // Mock status update for development
           setBusinesses(prevBusinesses =>

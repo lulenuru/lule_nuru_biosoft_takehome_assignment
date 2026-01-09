@@ -32,12 +32,8 @@ const UsersManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      // TODO: Replace with actual API endpoint
-      // const token = localStorage.getItem('authToken');
-      // const response = await axios.get('/api/superadmin/users', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-
+      // To be replaced with actual backend API endpoints
+      
       // Mock data
       setUsers([
         {

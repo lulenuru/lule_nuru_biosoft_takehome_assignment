@@ -15,12 +15,7 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      // TODO: Uncomment when backend is ready
-      // const token = localStorage.getItem('authToken');
-      // const response = await axios.get('/api/superadmin/products', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-      // setProducts(response.data);
+    // To be replaced with actual backend API endpoints
 
       // Mock data for development
       setProducts([
@@ -100,13 +95,7 @@ const Products = () => {
 
   const handleStatusChange = async (productId, newStatus) => {
     try {
-      // TODO: Uncomment when backend is ready
-      // const token = localStorage.getItem('authToken');
-      // await axios.patch(`/api/superadmin/products/${productId}/status`, 
-      //   { status: newStatus },
-      //   { headers: { Authorization: `Bearer ${token}` } }
-      // );
-
+      
       setProducts(prevProducts =>
         prevProducts.map(product =>
           product.id === productId

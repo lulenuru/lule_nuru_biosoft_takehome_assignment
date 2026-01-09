@@ -55,10 +55,7 @@ const Register = () => {
     }
 
     try {
-      // TODO: Replace with actual API endpoint when backend is ready
-      // const response = await axios.post('/api/auth/register', formData);
-
-      // Mock registration for development
+      // To be replaced with actual backend API endpoints
       alert('Registration successful! Your account is pending approval from the admin.');
       navigate('/');
     } catch (err) {
@@ -159,7 +156,7 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Owner Information */}
+          {/* Business Owner Information */}
           <div className="space-y-4 pt-4 border-t border-gray-200">
             <h3 className="text-lg font-semibold text-gray-900">Owner Information</h3>
             

@@ -32,12 +32,7 @@ const AddProduct = () => {
     setError('');
 
     try {
-      // TODO: Replace with actual API endpoint
-      // const token = localStorage.getItem('authToken');
-      // const response = await axios.post('/api/business/products', formData, {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-
+      
       alert('Product submitted successfully! Waiting for admin approval.');
       navigate('/business/products');
     } catch (err) {

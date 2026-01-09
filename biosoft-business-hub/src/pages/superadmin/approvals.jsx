@@ -3,7 +3,7 @@ import SuperAdminMainLayout from '../../components/SuperAdminMainLayout';
 import ConfirmBanner from '../../components/ConfirmBanner';
 
 const Approvals = () => {
-  const [activeTab, setActiveTab] = useState('products'); // 'products' or 'businesses'
+  const [activeTab, setActiveTab] = useState('products'); 
   const [pendingProducts, setPendingProducts] = useState([]);
   const [pendingBusinesses, setPendingBusinesses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,15 +21,6 @@ const Approvals = () => {
 
   const fetchPendingApprovals = async () => {
     try {
-      // TODO: Replace with actual API endpoints
-      // const token = localStorage.getItem('authToken');
-      // const productsRes = await axios.get('/api/superadmin/products?status=pending', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-      // const businessesRes = await axios.get('/api/superadmin/businesses?status=pending', {
-      //   headers: { Authorization: `Bearer ${token}` }
-      // });
-
       // Mock data
       setPendingProducts([
         {
@@ -115,12 +106,7 @@ const Approvals = () => {
       message: `Are you sure you want to ${actionText} "${product.name}" from ${product.business}?`,
       onConfirm: async () => {
         try {
-          // TODO: API call
-          // await axios.patch(`/api/superadmin/products/${productId}/status`, 
-          //   { status: action === 'approve' ? 'approved' : 'rejected' },
-          //   { headers: { Authorization: `Bearer ${token}` } }
-          // );
-
+         
           setPendingProducts(pendingProducts.filter(p => p.id !== productId));
           alert(`Product ${action === 'approve' ? 'approved' : 'rejected'} successfully!`);
         } catch (error) {
@@ -141,11 +127,6 @@ const Approvals = () => {
       message: `Are you sure you want to ${actionText} "${business.businessName}" owned by ${business.ownerName}?`,
       onConfirm: async () => {
         try {
-          // TODO: API call
-          // await axios.patch(`/api/superadmin/businesses/${businessId}/status`, 
-          //   { status: action === 'approve' ? 'active' : 'rejected' },
-          //   { headers: { Authorization: `Bearer ${token}` } }
-          // );
 
           setPendingBusinesses(pendingBusinesses.filter(b => b.id !== businessId));
           alert(`Business ${action === 'approve' ? 'approved' : 'rejected'} successfully!`);

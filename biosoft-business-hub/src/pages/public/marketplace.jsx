@@ -17,9 +17,6 @@ const Marketplace = () => {
 
   const fetchProducts = async () => {
     try {
-      // TODO: Replace with actual API endpoint
-      // const response = await axios.get('/api/public/products');
-      // setProducts(response.data.filter(p => p.status === 'approved'));
 
       // Mock data - only approved products
       setProducts([
