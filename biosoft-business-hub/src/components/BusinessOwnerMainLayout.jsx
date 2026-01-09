@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import logoutIcon from '../assets/images/logout-icon.png';
 
 const BusinessOwnerMainLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -70,9 +71,9 @@ const BusinessOwnerMainLayout = ({ children }) => {
         <div className="absolute bottom-0 w-full p-4">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center px-4 py-3 text-gray-100 hover:bg-gray-700 rounded-lg transition-colors"
+            className="w-full flex items-center px-4 py-3 text-gray-100 hover:bg-pink-200 hover:text-gray-900 rounded-lg transition-colors"
           >
-            <span className="text-xl mr-3">🚪</span>
+            <img src={logoutIcon} alt="Logout" className="w-5 h-5 mr-3" />
             <span className="font-medium">Logout</span>
           </button>
         </div>
