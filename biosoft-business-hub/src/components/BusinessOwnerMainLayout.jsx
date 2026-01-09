@@ -17,10 +17,8 @@ const BusinessOwnerMainLayout = ({ children }) => {
   const menuItems = [
     { name: 'Dashboard', path: '/business/dashboard', icon: '📊' },
     { name: 'My Products', path: '/business/products', icon: '📦' },
-    { name: 'Add Product', path: '/business/add-product', icon: '➕' },
     { name: 'Staff Management', path: '/business/staff', icon: '👥' },
     { name: 'Orders', path: '/business/orders', icon: '🛒' },
-    { name: 'Analytics', path: '/business/analytics', icon: '📈' },
     { name: 'Settings', path: '/business/settings', icon: '⚙️' },
   ];
 

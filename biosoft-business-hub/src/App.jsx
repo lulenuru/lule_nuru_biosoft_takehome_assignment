@@ -6,9 +6,12 @@ import Marketplace from './pages/public/marketplace'
 import Dashboard from './pages/superadmin/dashboard'
 import Businesses from './pages/superadmin/businesses'
 import Products from './pages/superadmin/products'
+import Approvals from './pages/superadmin/approvals'
+import UsersManagement from './pages/superadmin/users'
 import BusinessDashboard from './pages/business/dashboard'
 import BusinessProducts from './pages/business/products'
 import AddProduct from './pages/business/add-product'
+import Orders from './pages/business/orders'
 import StaffManagement from './pages/business/staff'
 import StaffDashboard from './pages/staff/dashboard'
 import './App.css'
@@ -24,9 +27,12 @@ function App() {
         <Route path="/superadmin/dashboard" element={<Dashboard />} />
         <Route path="/superadmin/businesses" element={<Businesses />} />
         <Route path="/superadmin/products" element={<Products />} />
+        <Route path="/superadmin/approvals" element={<Approvals />} />
+        <Route path="/superadmin/users" element={<UsersManagement />} />
         <Route path="/business/dashboard" element={<BusinessDashboard />} />
         <Route path="/business/products" element={<BusinessProducts />} />
         <Route path="/business/add-product" element={<AddProduct />} />
+        <Route path="/business/orders" element={<Orders />} />
         <Route path="/business/staff" element={<StaffManagement />} />
         <Route path="/staff/dashboard" element={<StaffDashboard />} />
         {/* Add other routes here */}
