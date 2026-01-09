@@ -5,6 +5,71 @@ lule_nuru_biosoft_takehome_assignment
 Project Overview**
 Biosoft Business Hub is a comprehensive marketplace platform that connects business owners with customers while providing powerful management tools for administrators and staff. The platform enables businesses to showcase their products after approval, manage inventory, handle orders, and coordinate with staff members who have role-based access.
 
+## Getting Started
+
+### Prerequisites
+
+Before running this application, ensure you have the following installed:
+- **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
+- **npm** (comes with Node.js) or **yarn**
+- A modern web browser (Chrome or Firefox)
+
+### Installation Steps
+
+1. **Clone or download the repository**
+   ```bash
+   cd c:\Users\Admin\Desktop\lule_nuru_biosoft_takehome_assignment\biosoft-business-hub
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+ 
+
+3. **Install Tailwind CSS and required packages** (if not already installed)
+   ```bash
+   npm install -D tailwindcss postcss autoprefixer
+   npm install react-router-dom axios
+   ```
+
+### Running the Application
+
+1. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+2. **Open your browser**
+   - The application will automatically open at `http://localhost:5173` (or the port shown in your terminal)
+   - If it doesn't open automatically, manually navigate to the URL shown in your terminal
+
+3. **Login with test credentials**
+
+   **Super Admin:**
+   - Email: `admin@biosoft.com`
+   - Password: `admin123`
+
+   **Business Owner:**
+   - Email: `business@biosoft.com`
+   - Password: `business123`
+
+   **Staff Member:**
+   - Email: `staff@biosoft.com`
+   - Password: `staff123`
+
+
+## Application Access Points
+
+Once the application is running, you can access:
+
+- **Login Page**: `http://localhost:5173/`
+- **Public Marketplace**: `http://localhost:5173/marketplace`
+- **Registration**: `http://localhost:5173/register`
+- **Super Admin Dashboard**: Login as admin → Auto-redirects to `/superadmin/dashboard`
+- **Business Owner Dashboard**: Login as business owner → Auto-redirects to `/business/dashboard`
+- **Staff Dashboard**: Login as staff → Auto-redirects to `/staff/dashboard`
+
 **Project Goals**
 -Authentication (Create a multi-role marketplace platform)
 -Product management (Enable business owners to register and manage their stores)
