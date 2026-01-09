@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BusinessOwnerMainLayout from '../../components/BusinessOwnerMainLayout';
+import ConfirmBanner from '../../components/ConfirmBanner';
 
 const BusinessProducts = () => {
   const navigate = useNavigate();
@@ -8,6 +9,13 @@ const BusinessProducts = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    type: 'danger',
+    title: '',
+    message: '',
+    onConfirm: () => {}
+  });
 
   useEffect(() => {
     fetchProducts();
@@ -21,7 +29,7 @@ const BusinessProducts = () => {
           id: 1,
           name: 'Wireless Bluetooth Headphones',
           category: 'Electronics',
-          price: 89.99,
+          price: 330000,
           stock: 45,
           status: 'approved',
           image: 'https://via.placeholder.com/150',
@@ -31,7 +39,7 @@ const BusinessProducts = () => {
           id: 2,
           name: 'Smart Watch Pro',
           category: 'Electronics',
-          price: 299.99,
+          price: 1100000,
           stock: 30,
           status: 'pending',
           image: 'https://via.placeholder.com/150',
@@ -41,7 +49,7 @@ const BusinessProducts = () => {
           id: 3,
           name: 'Laptop Stand Aluminum',
           category: 'Accessories',
-          price: 45.00,
+          price: 165000,
           stock: 0,
           status: 'approved',
           image: 'https://via.placeholder.com/150',
@@ -51,7 +59,7 @@ const BusinessProducts = () => {
           id: 4,
           name: 'USB-C Hub',
           category: 'Electronics',
-          price: 39.99,
+          price: 147000,
           stock: 120,
           status: 'rejected',
           image: 'https://via.placeholder.com/150',
@@ -66,10 +74,17 @@ const BusinessProducts = () => {
   };
 
   const handleDelete = (productId) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
-      setProducts(products.filter(p => p.id !== productId));
-      alert('Product deleted successfully');
-    }
+    const product = products.find(p => p.id === productId);
+    
+    setConfirmDialog({
+      isOpen: true,
+      type: 'danger',
+      title: 'Delete Product',
+      message: `Are you sure you want to delete "${product.name}"? This action cannot be undone.`,
+      onConfirm: () => {
+        setProducts(products.filter(p => p.id !== productId));
+      }
+    });
   };
 
   const filteredProducts = products.filter((product) => {
@@ -164,7 +179,7 @@ const BusinessProducts = () => {
                   <h3 className="font-bold text-gray-900 mb-1">{product.name}</h3>
                   <p className="text-xs text-gray-500 mb-2">{product.category}</p>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-lg font-bold text-gray-900">${product.price}</span>
+                    <span className="text-lg font-bold text-gray-900">UGX {product.price.toLocaleString()}</span>
                     <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadge(product.status)}`}>
                       {product.status}
                     </span>
@@ -195,6 +210,18 @@ const BusinessProducts = () => {
             <p className="text-gray-500">No products found.</p>
           </div>
         )}
+
+        {/* Confirm Dialog */}
+        <ConfirmBanner
+          isOpen={confirmDialog.isOpen}
+          onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+          onConfirm={confirmDialog.onConfirm}
+          title={confirmDialog.title}
+          message={confirmDialog.message}
+          type={confirmDialog.type}
+          confirmText="Yes, Delete"
+          cancelText="Cancel"
+        />
       </div>
     </BusinessOwnerMainLayout>
   );

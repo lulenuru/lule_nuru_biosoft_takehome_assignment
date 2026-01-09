@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-const SuperAdminMainLayout = ({ children }) => {
+const StaffMainLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,16 +12,47 @@ const SuperAdminMainLayout = ({ children }) => {
     navigate('/');
   };
 
-  const menuItems = [
-    { name: 'Dashboard', path: '/superadmin/dashboard', icon: '📊' },
-    { name: 'Business Owners', path: '/superadmin/businesses', icon: '🏢' },
-    { name: 'Pending Approvals', path: '/superadmin/approvals', icon: '⏳' },
-    { name: 'All Products', path: '/superadmin/products', icon: '📦' },
-    { name: 'Users Management', path: '/superadmin/users', icon: '👥' },
-    { name: 'Reports', path: '/superadmin/reports', icon: '📈' },
-    { name: 'Settings', path: '/superadmin/settings', icon: '⚙️' },
-  ];
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const staffRole = user.staffRole || 'Sales'; // Default role
 
+  // Role-based menu items
+  const getMenuItemsByRole = (role) => {
+    const commonItems = [
+      { name: 'Dashboard', path: '/staff/dashboard', icon: '📊', roles: ['Manager', 'Sales', 'Support', 'Marketing', 'Inventory'] }
+    ];
+
+    const roleSpecificItems = {
+      Manager: [
+        { name: 'Products', path: '/staff/products', icon: '📦' },
+        { name: 'Orders', path: '/staff/orders', icon: '🛒' },
+        { name: 'Reports', path: '/staff/reports', icon: '📈' },
+        { name: 'Team Overview', path: '/staff/team', icon: '👥' }
+      ],
+      Sales: [
+        { name: 'Products', path: '/staff/products', icon: '📦' },
+        { name: 'Orders', path: '/staff/orders', icon: '🛒' },
+        { name: 'My Sales', path: '/staff/my-sales', icon: '💰' }
+      ],
+      Support: [
+        { name: 'Orders', path: '/staff/orders', icon: '🛒' },
+        { name: 'Customer Queries', path: '/staff/queries', icon: '💬' }
+      ],
+      Marketing: [
+        { name: 'Products', path: '/staff/products', icon: '📦' },
+        { name: 'Campaigns', path: '/staff/campaigns', icon: '📢' },
+        { name: 'Analytics', path: '/staff/analytics', icon: '📊' }
+      ],
+      Inventory: [
+        { name: 'Products', path: '/staff/products', icon: '📦' },
+        { name: 'Stock Management', path: '/staff/stock', icon: '📋' },
+        { name: 'Suppliers', path: '/staff/suppliers', icon: '🚚' }
+      ]
+    };
+
+    return [...commonItems, ...(roleSpecificItems[role] || roleSpecificItems.Sales)];
+  };
+
+  const menuItems = getMenuItemsByRole(staffRole);
   const isActivePath = (path) => location.pathname === path;
 
   return (
@@ -41,7 +72,10 @@ const SuperAdminMainLayout = ({ children }) => {
         }`}
       >
         <div className="flex items-center justify-between h-16 px-6 bg-gray-900">
-          <h1 className="text-xl font-bold">SuperAdmin Panel</h1>
+          <div>
+            <h1 className="text-xl font-bold">Staff Panel</h1>
+            <p className="text-xs text-gray-400">{staffRole}</p>
+          </div>
           <button
             className="lg:hidden text-white"
             onClick={() => setSidebarOpen(false)}
@@ -86,18 +120,8 @@ const SuperAdminMainLayout = ({ children }) => {
             className="lg:hidden text-gray-600"
             onClick={() => setSidebarOpen(true)}
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
 
@@ -106,18 +130,18 @@ const SuperAdminMainLayout = ({ children }) => {
               <button className="flex items-center text-gray-700 hover:text-gray-900">
                 <span className="text-2xl">🔔</span>
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  3
+                  2
                 </span>
               </button>
             </div>
 
             <div className="flex items-center space-x-3">
               <div className="text-right">
-                <p className="text-sm font-medium text-gray-700">Super Admin</p>
-                <p className="text-xs text-gray-500">admin@biosoft.com</p>
+                <p className="text-sm font-medium text-gray-700">{user.name || 'Staff Member'}</p>
+                <p className="text-xs text-gray-500">{staffRole}</p>
               </div>
               <div className="h-10 w-10 rounded-full bg-pink-300 flex items-center justify-center text-gray-900 font-bold">
-                SA
+                {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
               </div>
             </div>
           </div>
@@ -132,4 +156,4 @@ const SuperAdminMainLayout = ({ children }) => {
   );
 };
 
-export default SuperAdminMainLayout;
+export default StaffMainLayout;

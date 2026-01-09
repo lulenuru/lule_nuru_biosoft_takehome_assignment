@@ -109,16 +109,16 @@ const AddProduct = () => {
 
               <div>
                 <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">
-                  Price ($) *
+                  Price (UGX) *
                 </label>
                 <input
                   id="price"
                   name="price"
                   type="number"
-                  step="0.01"
+                  step="1000"
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-300"
-                  placeholder="0.00"
+                  placeholder="0"
                   value={formData.price}
                   onChange={handleChange}
                 />

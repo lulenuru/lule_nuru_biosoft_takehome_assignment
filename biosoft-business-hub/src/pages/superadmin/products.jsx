@@ -29,7 +29,7 @@ const Products = () => {
           name: 'Wireless Bluetooth Headphones',
           business: 'Tech Solutions Ltd',
           category: 'Electronics',
-          price: 89.99,
+          price: 330000,
           stock: 45,
           status: 'approved',
           image: 'https://via.placeholder.com/150',
@@ -40,7 +40,7 @@ const Products = () => {
           name: 'Summer Collection Dress',
           business: 'Fashion Hub',
           category: 'Fashion',
-          price: 59.99,
+          price: 220000,
           stock: 120,
           status: 'pending',
           image: 'https://via.placeholder.com/150',
@@ -51,7 +51,7 @@ const Products = () => {
           name: 'Organic Honey 500g',
           business: 'Food Delights',
           category: 'Food',
-          price: 12.99,
+          price: 48000,
           stock: 200,
           status: 'approved',
           image: 'https://via.placeholder.com/150',
@@ -62,7 +62,7 @@ const Products = () => {
           name: 'Smart Watch Pro',
           business: 'Electronics Store',
           category: 'Electronics',
-          price: 299.99,
+          price: 1100000,
           stock: 30,
           status: 'rejected',
           image: 'https://via.placeholder.com/150',
@@ -73,7 +73,7 @@ const Products = () => {
           name: 'Decorative Wall Art',
           business: 'Home Decor Plus',
           category: 'Home & Garden',
-          price: 45.00,
+          price: 165000,
           stock: 75,
           status: 'approved',
           image: 'https://via.placeholder.com/150',
@@ -84,7 +84,7 @@ const Products = () => {
           name: 'Running Shoes',
           business: 'Fashion Hub',
           category: 'Fashion',
-          price: 79.99,
+          price: 294000,
           stock: 90,
           status: 'pending',
           image: 'https://via.placeholder.com/150',
@@ -243,7 +243,7 @@ const Products = () => {
                   <h3 className="font-bold text-gray-900 mb-1">{product.name}</h3>
                   <p className="text-xs text-gray-500 mb-2">{product.business}</p>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-lg font-bold text-gray-900">${product.price}</span>
+                    <span className="text-lg font-bold text-gray-900">UGX {product.price.toLocaleString()}</span>
                     <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadge(product.status)}`}>
                       {product.status}
                     </span>
@@ -324,7 +324,7 @@ const Products = () => {
                         {product.category}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
-                        ${product.price}
+                        UGX {product.price.toLocaleString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {product.stock}

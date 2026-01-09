@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import BusinessOwnerMainLayout from '../../components/BusinessOwnerMainLayout';
+import ConfirmBanner from '../../components/ConfirmBanner';
 
 const StaffManagement = () => {
   const [staff, setStaff] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    type: 'danger',
+    title: '',
+    message: '',
+    onConfirm: () => {}
+  });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,27 +38,50 @@ const StaffManagement = () => {
       id: staff.length + 1,
       ...formData,
       status: 'active',
-      joinDate: new Date().toISOString().split('T')[0]
+      joinDate: new Date().toISOString().split('T')[0],
+      // Generate temporary credentials for the staff member
+      credentials: {
+        email: formData.email,
+        tempPassword: `Staff${Math.random().toString(36).slice(-6)}`
+      }
     };
     setStaff([...staff, newStaff]);
     setShowAddModal(false);
     setFormData({ name: '', email: '', role: '', phone: '' });
-    alert('Staff member added successfully!');
+    alert(`Staff member added! Temporary password: ${newStaff.credentials.tempPassword}\nThey can login with role: ${formData.role}`);
   };
 
   const handleToggleStatus = (staffId) => {
-    setStaff(staff.map(s => 
-      s.id === staffId 
-        ? { ...s, status: s.status === 'active' ? 'inactive' : 'active' }
-        : s
-    ));
+    const staffMember = staff.find(s => s.id === staffId);
+    const newStatus = staffMember.status === 'active' ? 'inactive' : 'active';
+    
+    setConfirmDialog({
+      isOpen: true,
+      type: 'warning',
+      title: `${newStatus === 'active' ? 'Activate' : 'Deactivate'} Staff Member`,
+      message: `Are you sure you want to ${newStatus === 'active' ? 'activate' : 'deactivate'} ${staffMember.name}?`,
+      onConfirm: () => {
+        setStaff(staff.map(s => 
+          s.id === staffId 
+            ? { ...s, status: newStatus }
+            : s
+        ));
+      }
+    });
   };
 
   const handleDelete = (staffId) => {
-    if (window.confirm('Are you sure you want to remove this staff member?')) {
-      setStaff(staff.filter(s => s.id !== staffId));
-      alert('Staff member removed successfully');
-    }
+    const staffMember = staff.find(s => s.id === staffId);
+    
+    setConfirmDialog({
+      isOpen: true,
+      type: 'danger',
+      title: 'Remove Staff Member',
+      message: `Are you sure you want to remove ${staffMember.name}? This action cannot be undone.`,
+      onConfirm: () => {
+        setStaff(staff.filter(s => s.id !== staffId));
+      }
+    });
   };
 
   const roles = ['Manager', 'Sales', 'Support', 'Marketing', 'Inventory'];
@@ -211,6 +242,18 @@ const StaffManagement = () => {
             </div>
           </div>
         )}
+
+        {/* Confirm Dialog */}
+        <ConfirmBanner
+          isOpen={confirmDialog.isOpen}
+          onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+          onConfirm={confirmDialog.onConfirm}
+          title={confirmDialog.title}
+          message={confirmDialog.message}
+          type={confirmDialog.type}
+          confirmText="Yes, Continue"
+          cancelText="Cancel"
+        />
       </div>
     </BusinessOwnerMainLayout>
   );

@@ -60,7 +60,8 @@ const Login = () => {
             id: 3,
             name: 'Staff Member',
             email: 'staff@biosoft.com',
-            role: 'staff'
+            role: 'staff',
+            staffRole: 'Sales' // This would come from the backend based on what role was assigned
           }
         };
       } else {
@@ -97,7 +98,7 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-md">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Business Hub Login
+            Biosoft Business Hub Login
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Sign in to manage your marketplace
@@ -112,37 +113,39 @@ const Login = () => {
           )}
 
           <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-pink-300 focus:border-pink-300 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-pink-300 focus:border-pink-300 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="email" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-300 focus:border-pink-300 focus:z-10 sm:text-sm"
+                  placeholder="Email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-300 focus:border-pink-300 focus:z-10 sm:text-sm"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
           </div>
 
@@ -181,6 +184,11 @@ const Login = () => {
               Don't have an account?{' '}
               <Link to="/register" className="font-medium text-pink-400 hover:text-pink-500">
                 Register as Business Owner
+              </Link>
+            </p>
+            <p className="text-sm text-gray-600 mt-2">
+              <Link to="/marketplace" className="font-medium text-pink-400 hover:text-pink-500">
+                Browse Marketplace
               </Link>
             </p>
           </div>

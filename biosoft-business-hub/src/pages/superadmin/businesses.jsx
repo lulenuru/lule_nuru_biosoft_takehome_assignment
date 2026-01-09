@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SuperAdminMainLayout from '../../components/SuperAdminMainLayout';
+import ConfirmBanner from '../../components/ConfirmBanner';
 import axios from 'axios';
 
 const Businesses = () => {
@@ -8,6 +9,13 @@ const Businesses = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [error, setError] = useState('');
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    type: 'warning',
+    title: '',
+    message: '',
+    onConfirm: () => {}
+  });
 
   useEffect(() => {
     fetchBusinesses();
@@ -75,28 +83,36 @@ const Businesses = () => {
   };
 
   const handleStatusChange = async (businessId, newStatus) => {
-    try {
-      // TODO: Uncomment when backend is ready
-      // const token = localStorage.getItem('authToken');
-      // await axios.patch(
-      //   `/api/superadmin/businesses/${businessId}/status`,
-      //   { status: newStatus },
-      //   { headers: { Authorization: `Bearer ${token}` } }
-      // );
+    const business = businesses.find(b => b.id === businessId);
+    
+    setConfirmDialog({
+      isOpen: true,
+      type: newStatus === 'suspended' ? 'danger' : 'warning',
+      title: `${newStatus === 'suspended' ? 'Suspend' : 'Activate'} Business`,
+      message: `Are you sure you want to ${newStatus === 'suspended' ? 'suspend' : 'activate'} ${business.name}?`,
+      onConfirm: async () => {
+        try {
+          // TODO: Uncomment when backend is ready
+          // const token = localStorage.getItem('authToken');
+          // await axios.patch(
+          //   `/api/superadmin/businesses/${businessId}/status`,
+          //   { status: newStatus },
+          //   { headers: { Authorization: `Bearer ${token}` } }
+          // );
 
-      // Mock status update for development
-      setBusinesses(prevBusinesses =>
-        prevBusinesses.map(business =>
-          business.id === businessId
-            ? { ...business, status: newStatus }
-            : business
-        )
-      );
-      alert(`Business status updated to ${newStatus}`);
-    } catch (error) {
-      console.error('Error updating status:', error);
-      alert('Failed to update business status');
-    }
+          // Mock status update for development
+          setBusinesses(prevBusinesses =>
+            prevBusinesses.map(b =>
+              b.id === businessId
+                ? { ...b, status: newStatus }
+                : b
+            )
+          );
+        } catch (error) {
+          console.error('Error updating status:', error);
+        }
+      }
+    });
   };
 
   const filteredBusinesses = businesses.filter((business) => {
@@ -260,6 +276,18 @@ const Businesses = () => {
             </div>
           )}
         </div>
+
+        {/* Confirm Dialog */}
+        <ConfirmBanner
+          isOpen={confirmDialog.isOpen}
+          onClose={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
+          onConfirm={confirmDialog.onConfirm}
+          title={confirmDialog.title}
+          message={confirmDialog.message}
+          type={confirmDialog.type}
+          confirmText="Yes, Continue"
+          cancelText="Cancel"
+        />
       </div>
     </SuperAdminMainLayout>
   );

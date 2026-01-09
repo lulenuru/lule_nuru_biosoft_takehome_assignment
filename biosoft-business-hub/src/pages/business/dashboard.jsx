@@ -9,20 +9,20 @@ const BusinessDashboard = () => {
     rejectedProducts: 2,
     totalStaff: 5,
     totalOrders: 150,
-    revenue: 15000,
+    revenue: 55000000,
     todayOrders: 8
   });
 
   const [recentOrders, setRecentOrders] = useState([
-    { id: 1, customer: 'John Smith', product: 'Wireless Headphones', amount: 89.99, status: 'completed', date: '2024-01-15' },
-    { id: 2, customer: 'Sarah Johnson', product: 'Smart Watch', amount: 299.99, status: 'processing', date: '2024-01-15' },
-    { id: 3, customer: 'Mike Brown', product: 'Laptop Stand', amount: 45.00, status: 'pending', date: '2024-01-14' }
+    { id: 1, customer: 'John Smith', product: 'Wireless Headphones', amount: 330000, status: 'completed', date: '2024-01-15' },
+    { id: 2, customer: 'Sarah Johnson', product: 'Smart Watch', amount: 1100000, status: 'processing', date: '2024-01-15' },
+    { id: 3, customer: 'Mike Brown', product: 'Laptop Stand', amount: 165000, status: 'pending', date: '2024-01-14' }
   ]);
 
   const [topProducts, setTopProducts] = useState([
-    { id: 1, name: 'Wireless Headphones', sales: 145, revenue: 13055.55 },
-    { id: 2, name: 'Smart Watch', sales: 89, revenue: 26699.11 },
-    { id: 3, name: 'Laptop Stand', sales: 67, revenue: 3015.00 }
+    { id: 1, name: 'Wireless Headphones', sales: 145, revenue: 47850000 },
+    { id: 2, name: 'Smart Watch', sales: 89, revenue: 97900000 },
+    { id: 3, name: 'Laptop Stand', sales: 67, revenue: 11055000 }
   ]);
 
   const getOrderStatusBadge = (status) => {
@@ -82,7 +82,7 @@ const BusinessDashboard = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-500 text-sm font-medium">Total Revenue</p>
-                <p className="text-3xl font-bold text-gray-900 mt-2">${(stats.revenue / 1000).toFixed(1)}K</p>
+                <p className="text-3xl font-bold text-gray-900 mt-2">UGX {(stats.revenue / 1000000).toFixed(1)}M</p>
                 <p className="text-green-600 text-xs mt-1">+12% this month</p>
               </div>
               <div className="text-4xl">💰</div>
@@ -108,7 +108,7 @@ const BusinessDashboard = () => {
                     </span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-bold text-gray-900">${order.amount}</span>
+                    <span className="text-sm font-bold text-gray-900">UGX {order.amount.toLocaleString()}</span>
                     <span className="text-xs text-gray-400">{order.date}</span>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ const BusinessDashboard = () => {
                       <p className="text-xs text-gray-500">{product.sales} sales</p>
                     </div>
                   </div>
-                  <span className="text-sm font-bold text-gray-900">${product.revenue.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-gray-900">UGX {product.revenue.toLocaleString()}</span>
                 </div>
               ))}
             </div>

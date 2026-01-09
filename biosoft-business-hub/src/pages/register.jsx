@@ -46,6 +46,14 @@ const Register = () => {
       return;
     }
 
+    // Validate Ugandan phone number format
+    const ugandanPhoneRegex = /^(\+256|0)(7[0-9]{8}|3[0-9]{8})$/;
+    if (!ugandanPhoneRegex.test(formData.phone)) {
+      setError('Please enter a valid Ugandan phone number (e.g., +256700000000)');
+      setLoading(false);
+      return;
+    }
+
     try {
       // TODO: Replace with actual API endpoint when backend is ready
       // const response = await axios.post('/api/auth/register', formData);
@@ -198,10 +206,11 @@ const Register = () => {
                   type="tel"
                   required
                   className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-pink-300 focus:border-pink-300 sm:text-sm"
-                  placeholder="+1234567890"
+                  placeholder="+256700000000"
                   value={formData.phone}
                   onChange={handleChange}
                 />
+                {/* <p className="mt-1 text-xs text-gray-500">Format: +256700000000 </p> */}
               </div>
             </div>
 
